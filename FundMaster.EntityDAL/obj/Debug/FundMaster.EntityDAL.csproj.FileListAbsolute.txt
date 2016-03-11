@@ -1,0 +1,14 @@
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\obj\Debug\FundMaster.EntityDAL.csprojResolveAssemblyReference.cache
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\bin\Debug\FundMaster.EntityDAL.dll.config
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\bin\Debug\FundMaster.EntityDAL.dll
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\bin\Debug\FundMaster.EntityDAL.pdb
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\bin\Debug\EntityFramework.dll
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\bin\Debug\FundMaster.Entity.dll
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\bin\Debug\FundMaster.Entity.pdb
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\bin\Debug\EntityFramework.xml
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\obj\Debug\FundMaster.EntityDAL.dll
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\obj\Debug\FundMaster.EntityDAL.pdb
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\obj\Debug\FundMaster.Migrations.Initial.resources
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\obj\Debug\FundMaster.EntityDAL.csproj.GenerateResource.Cache
