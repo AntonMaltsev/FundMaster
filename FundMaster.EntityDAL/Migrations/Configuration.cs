@@ -23,8 +23,8 @@ namespace FundMaster.Migrations
             context.SecurityType.AddOrUpdate(st => st.Id, new SecurityType { Id = (int)SecurityType.SecurityTypeEnum.Option, Description = Entity.Utils.Common.GetEnumDescription(SecurityType.SecurityTypeEnum.Option) });
 
             
-            context.Security.AddOrUpdate(s => s.Id, new Security {Id = 1, SecurityTypeId = (int)SecurityType.SecurityTypeEnum.Equity, Name = "TestEquity", Price = 1, Qty = 1, IsDeleted = false });
-            context.Security.AddOrUpdate(s => s.Id, new Security {Id = 2, SecurityTypeId = (int)SecurityType.SecurityTypeEnum.Bond, Name = "TestBond", Price = 1, Qty = 1, IsDeleted = false });
+            context.Security.AddOrUpdate(s => s.Id, new Security {SecurityTypeId = (int)SecurityType.SecurityTypeEnum.Equity, Name = "TestEquity", Price = 1, Qty = 1, IsDeleted = false });
+            context.Security.AddOrUpdate(s => s.Id, new Security {SecurityTypeId = (int)SecurityType.SecurityTypeEnum.Bond, Name = "TestBond", Price = 1, Qty = 1, IsDeleted = false });
         }
     }
 }

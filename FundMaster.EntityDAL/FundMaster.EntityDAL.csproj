@@ -53,9 +53,9 @@
     <Compile Include="BaseRepository.cs" />
     <Compile Include="FundMasterContext.cs" />
     <Compile Include="FundRepository.cs" />
-    <Compile Include="Migrations\201603111157169_Initial.cs" />
-    <Compile Include="Migrations\201603111157169_Initial.Designer.cs">
-      <DependentUpon>201603111157169_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201603130904432_Initial.cs" />
+    <Compile Include="Migrations\201603130904432_Initial.Designer.cs">
+      <DependentUpon>201603130904432_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,8 +72,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603111157169_Initial.resx">
-      <DependentUpon>201603111157169_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603130904432_Initial.resx">
+      <DependentUpon>201603130904432_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -53,7 +53,7 @@ namespace FundMaster.Migrations
                 "dbo.Security",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         SecurityTypeId = c.Int(nullable: false),
                         Name = c.String(),
                         Price = c.Decimal(precision: 18, scale: 2),

@@ -5,6 +5,9 @@ namespace FundMaster.Entity
 {
     public class Security : BaseEntity
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public override int Id { get; set; }
         public int SecurityTypeId { get; set; }
         public string Name { get; set; }
         public decimal? Price { get; set; }

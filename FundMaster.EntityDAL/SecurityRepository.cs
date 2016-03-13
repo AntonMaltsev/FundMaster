@@ -30,5 +30,10 @@ namespace FundMaster.EntityDAL
         {
             return Filter(s => !s.IsDeleted);
         }
+
+        public IQueryable<Security> GetAllSecuritiesQuery()
+        {
+            return All();
+        }
     }
 }

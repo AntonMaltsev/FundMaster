@@ -13,7 +13,7 @@ namespace FundMaster.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201603111157169_Initial"; }
+            get { return "201603130904432_Initial"; }
         }
         
         string IMigrationMetadata.Source
