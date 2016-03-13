@@ -29,11 +29,11 @@ namespace FundMaster
             InitializeComponent();
             this.DataContext = this;
 
-            var secRep = new SecurityRepository();
+            var secRep  = new SecurityRepository();
             var fundRep = new FundRepository();
 
-            dataGrid_Fund.ItemsSource = fundRep.GetAllFundsQuery().ToList();
-            SecType_comboBox.ItemsSource = secRep.GetSecurityTypes().ToList();
+            dataGrid_Fund.ItemsSource       = fundRep.GetAllFundsQuery().ToList();
+            SecType_comboBox.ItemsSource    = secRep.GetSecurityTypes().ToList();
             securities_dataGrid.ItemsSource = secRep.GetSecurityQuery().ToList();
         }
 
@@ -42,12 +42,18 @@ namespace FundMaster
             var fundRep = new FundRepository();
             Fund fund = new Fund();
 
-            fund = fundRep.CreateReferencedObject();
-            fund.IsDeleted = ((bool)Deleted_checkbox.IsChecked) ? true : false;
-            fund.Name = FundName_txt.Text;
-            
-            fundRep.Save();
+            if (fundRep.FindByName(FundName_txt.Text) == null)
+            {
+                fund = fundRep.CreateReferencedObject();
+                fund.IsDeleted = ((bool)Deleted_checkbox.IsChecked) ? true : false;
+                fund.Name = FundName_txt.Text;
 
+                fundRep.Save();
+            }
+            else{
+                FundName_txt.Text = "Already exists such Fund name. Please try again.";
+            }
+               
             dataGrid_Fund.ItemsSource = fundRep.GetAllFundsQuery().ToList();
         }
 
@@ -60,6 +66,34 @@ namespace FundMaster
         {
             var fundRep = new FundRepository();
             dataGrid_Fund.ItemsSource = fundRep.GetAllFundsQuery().ToList();
+        }
+
+        private void securities_dataGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void SecurityAdd_btn_Click(object sender, RoutedEventArgs e)
+        {
+            var secRep = new SecurityRepository();
+            Security sec = new Security();
+
+            if (secRep.GetSecurityByName(security_textBox.Text) == null)
+            {
+                sec         =   secRep.CreateReferencedObject();
+                sec.Name    =   security_textBox.Text;
+                sec.Price   =   Convert.ToDecimal(secprice_textBox.Text);
+                sec.Qty     =   Convert.ToInt32(secQty_textBox.Text);
+                sec.SecurityTypeId  = secRep.GetSecurityTypeByName(SecType_comboBox.SelectedItem.ToString()).Id;
+                sec.IsDeleted       = ((bool)security_checkBox.IsChecked) ? true : false;
+
+                secRep.Save();
+            }
+            else
+            {
+                FundName_txt.Text = "Already exists such Sec name. Please try again.";
+            }
+
+            securities_dataGrid.ItemsSource = secRep.GetSecurityQuery().ToList();
         }
     }
 }

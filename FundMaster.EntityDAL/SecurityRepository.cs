@@ -9,7 +9,11 @@ namespace FundMaster.EntityDAL
     {
         public IQueryable<object> GetSecurityTypes()
         {
-            return Context.SecurityType.Select(st => new {st.Description});            
+            return Context.SecurityType.Select(st => st.Description);            
+        }
+        public SecurityType GetSecurityTypeByName(string name)
+        {
+            return Context.SecurityType.Where(st => st.Description == name).FirstOrDefault();
         }
 
         public Security GetSecurityByName(string name)

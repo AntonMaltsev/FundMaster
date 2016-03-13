@@ -17,22 +17,28 @@
                     </Grid.ColumnDefinitions>
                     <Label x:Name="label" Content="Create new Fund" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
                     <Label x:Name="label_Copy" Content="Name" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="FundName_txt" HorizontalAlignment="Left" Height="23" Margin="70,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-                    <Button x:Name="FundSave_button" Content="Save" HorizontalAlignment="Left" Margin="70,117,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="FundSave_button_Click"/>
-                    <DataGrid x:Name="dataGrid_Fund" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" Height="195" Width="650" SelectionChanged="dataGrid_Fund_SelectionChanged" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="FundName_txt" HorizontalAlignment="Left" Height="23" Margin="70,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240" Grid.Column="1"/>
+                    <Button x:Name="FundSave_button" Content="Add" HorizontalAlignment="Left" Margin="145,117,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="FundSave_button_Click"/>
+                    <DataGrid x:Name="dataGrid_Fund" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="344,18,0,0" VerticalAlignment="Top" SelectionChanged="dataGrid_Fund_SelectionChanged" Grid.Column="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="CreatedUTC" Binding="{Binding CreatedUTC}" />
+                            <DataGridTextColumn Header="isDeleted" Binding="{Binding isDeleted}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Label x:Name="label_Deleted" Content="Mark as deleted" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="117"/>
                     <CheckBox x:Name="Deleted_checkbox" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="70,88,0,0" VerticalAlignment="Top"/>
-                    <Button x:Name="refresh_button" Content="Refresh" Grid.Column="1" HorizontalAlignment="Left" Margin="533,117,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+                    <Button x:Name="refresh_button" Content="Refresh" Grid.Column="1" HorizontalAlignment="Left" Margin="235,117,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Security">
-                <Grid Background="#FFE5E5E5" Margin="0,-7,0,7" RenderTransformOrigin="0.5,0.519">
+                <Grid Background="#FFE5E5E5" Margin="-9,-7,9,7" RenderTransformOrigin="0.5,0.519">
                     <Label x:Name="SecurityInfo_label" Content="Create new security" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="SecurityName_label" Content="Security Name" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="PriceName_label" Content="Security Type" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="QuantityName_label" Content="Price" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top"/>
-                    <Button x:Name="SecuritySave_btn" Content="Save" HorizontalAlignment="Left" Margin="242,217,0,0" VerticalAlignment="Top" Width="75"/>
-                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="122,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="195"/>
+                    <Button x:Name="SecurityAdd_btn" Content="Add" HorizontalAlignment="Left" Margin="216,222,0,0" VerticalAlignment="Top" Width="75" Click="SecurityAdd_btn_Click"/>
+                    <TextBox x:Name="security_textBox" HorizontalAlignment="Left" Height="23" Margin="122,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169"/>
                     <TextBox x:Name="textBox1_Copy" HorizontalAlignment="Left" Height="23" Margin="122,122,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <Grid x:Name="SecFundMappingGrid" HorizontalAlignment="Left" Height="292" Margin="372,25,0,0" VerticalAlignment="Top" Width="375" InputScope="{Binding Mode=OneWay}">
                         <Grid.Effect>
@@ -42,15 +48,22 @@
                             <EntityDAL:FundMasterContext/>
                         </Grid.DataContext>
                     </Grid>
-                    <DataGrid x:Name="securities_dataGrid" HorizontalAlignment="Left" Margin="362,10,0,0" VerticalAlignment="Top" Height="227" Width="290">
+                    <DataGrid x:Name="securities_dataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="296,58,0,0" VerticalAlignment="Top" Loaded="securities_dataGrid_Loaded">
                         <DataGrid.Columns>
-                            <DataGridTextColumn/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                            <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
+                            <DataGridTextColumn Header="Quantity" Binding="{Binding Qty}" />
+                            <DataGridTextColumn Header="CreatedUTC" Binding="{Binding CreatedUTC}" />
+                            <DataGridTextColumn Header="isDeleted" Binding="{Binding isDeleted}" />
                         </DataGrid.Columns>
                     </DataGrid>
                     <Label x:Name="QuantityName_label_Copy" Content="Quantity" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="textBox1_Copy1" HorizontalAlignment="Left" Height="23" Margin="122,154,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                    <Button x:Name="SecuritySave_btn_Copy" Content="Save" HorizontalAlignment="Left" Margin="576,252,0,0" VerticalAlignment="Top" Width="75"/>
-                    <ComboBox x:Name="SecType_comboBox" HorizontalAlignment="Left" Margin="122,91,0,0" VerticalAlignment="Top" Width="195"/>
+                    <Button x:Name="SecurityRefresh_btn" Content="Refresh" HorizontalAlignment="Left" Margin="489,31,0,0" VerticalAlignment="Top" Width="75"/>
+                    <ComboBox x:Name="SecType_comboBox" HorizontalAlignment="Left" Margin="122,91,0,0" VerticalAlignment="Top" Width="169"/>
+                    <Label x:Name="SecurityInfo_label_Copy" Content="Securities List" HorizontalAlignment="Left" Margin="296,25,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="QuantityName_label_Copy1" Content="Mark as Deleted" HorizontalAlignment="Left" Margin="10,181,0,0" VerticalAlignment="Top" Width="113"/>
+                    <CheckBox x:Name="security_checkBox" Content="" HorizontalAlignment="Left" Margin="122,187,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Fund Summary">
