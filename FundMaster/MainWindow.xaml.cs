@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Data;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -101,6 +101,84 @@ namespace FundMaster
             var secRep = new SecurityRepository();
 
             securities_dataGrid.ItemsSource = secRep.GetAllSecuritiesQuery().ToList();
+        }
+
+        private void funds_comboBox_DropDownOpened(object sender, EventArgs e)
+        {
+            var secFund = new FundRepository();
+
+            funds_comboBox.ItemsSource = secFund.GetFundsNames().ToList();
+        }
+
+        private void FM_Refresh_button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void funds_comboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            var fundRep = new FundRepository();
+            var secRep = new SecurityRepository();
+
+            FM_sec_list_dataGrid.ItemsSource = secRep.GetSecurityQuery().ToList();
+            FM_sec_fund_list_dataGrid.ItemsSource = secRep.GetSecuritiesByFundId(fundRep.FindByName(funds_comboBox.SelectedItem.ToString()).Id).ToList();
+        }
+
+        private void FM_sec_list_dataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (FM_sec_list_dataGrid.SelectedItem == null)
+                return;
+            
+            var sfRep   = new SecFundRepository();
+            var fundRep = new FundRepository();
+            var secRep  = new SecurityRepository();
+
+            int fundId = fundRep.FindByName(funds_comboBox.SelectedItem.ToString()).Id;
+            Security row = (Security)FM_sec_list_dataGrid.SelectedItems[0];
+            int secId = Convert.ToInt32(row.Id);
+
+            SecFund secFund = sfRep.SecFundByIds(fundId, secId);
+            if (secFund == null)
+            {
+                secFund = sfRep.CreateReferencedObject();
+                secFund.FundId = fundId;
+                secFund.SecurityId = secId;
+                secFund.IsDeleted = false;
+
+                sfRep.Save();
+            }
+            else if(secFund.IsDeleted == true)
+            {
+                secFund.IsDeleted = false;
+                sfRep.Save();
+            }
+            else
+                security_textBox.Text = "Already exists such Sec name. Please try again.";
+
+            FM_sec_fund_list_dataGrid.ItemsSource = null;
+            FM_sec_fund_list_dataGrid.ItemsSource = secRep.GetSecuritiesByFundId(fundId).ToList();            
+        }
+
+        private void FM_sec_fund_list_dataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (FM_sec_fund_list_dataGrid.SelectedItem == null)
+                return;
+
+            var sfRep = new SecFundRepository();
+            var fundRep = new FundRepository();
+            var secRep = new SecurityRepository();
+
+            int fundId = fundRep.FindByName(funds_comboBox.SelectedItem.ToString()).Id;
+            Security row = (Security)FM_sec_fund_list_dataGrid.SelectedItems[0];
+            int secId = Convert.ToInt32(row.Id);
+
+            var secFund = sfRep.SecFundByIds(fundId, secId);
+
+            secFund.IsDeleted = true;
+            sfRep.Save();
+
+            FM_sec_fund_list_dataGrid.ItemsSource = null;
+            FM_sec_fund_list_dataGrid.ItemsSource = secRep.GetSecuritiesByFundId(fundId).ToList();
         }
     }
 }

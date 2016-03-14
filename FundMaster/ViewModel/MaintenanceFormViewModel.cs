@@ -11,6 +11,9 @@ namespace FundMaster.ViewModel
 {
     public class MaintenanceFormViewModel : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Guys, I see with what is need to be expanded here - ViewModel and work with notifications, log4net and fields validation, but it takes more time, so suggest to talk on call about that if necessary 
+        /// </summary>
         private Security currentSecurity;
         public Security CurrentSecurity;
 

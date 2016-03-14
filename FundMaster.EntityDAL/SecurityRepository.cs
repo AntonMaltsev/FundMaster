@@ -1,12 +1,15 @@
 ﻿using System.Linq;
 using FundMaster.Entity;
 using System.Data.Entity;
-using System.Collections.Generic;
 
 namespace FundMaster.EntityDAL
 {
     public class SecurityRepository : BaseRepository<Security>
     {
+        public IQueryable<Security> GetSecuritiesByFundId(int fundId)
+        {
+            return Context.SecFund.Where(f => f.FundId == fundId && !f.IsDeleted).Select(s => s.Security).Where(s => !s.IsDeleted);
+        }
         public IQueryable<object> GetSecurityTypes()
         {
             return Context.SecurityType.Select(st => st.Description);            
