@@ -15,54 +15,37 @@ As a Fund Manager, I want to be able to add stocks to my Fund so that I can m
 
 on my Fund.
 
-Acceptance Criteria
+Acceptance Criteria descibed in email.
 
-1) I can add an 'Equity' or 'Bond' stock to my Fund via a Panel at the top of my screen.
 
-2) When adding an 'Equity' or 'Bond' stock to my Fund, I must specify the price I bought the 
+# HowTo:
 
-stock at and the quantity of the stock that I bought, which are both mandatory when adding a 
+You have to have MSSQL Express or any other versions server installed
 
-stock to my fund
+1. Ensure connection credentials to your DB is correct in App.config file - section as below:
+  
+  <connectionStrings>
+    <add name="FundMasterLocal" providerName="System.Data.SqlClient" connectionString="Data Source=.\;initial catalog=FundMaster;integrated security=True;multipleactiveresultsets=True;App=FundMaster" />
+  </connectionStrings>
+  
+2. Afterward, open Nuget console in MS Visual Studio and make Migration to your database by run following:
 
-3) I can see all stocks added to my Fund in a data grid in a Panel in the middle of my screen, 
+Update-Database -ProjectName FundMaster.EntityDAL -StartUpProjectName FundMaster.EntityDAL -ConnectionStringName "FundMasterLocal"
 
-showing the following stock level information:
+After that it should be created DB structure with initial data seeding
 
- Stock Type e.g. 'Equity' or 'Bond'
+3. Feel free to run application where you will find 3 tabs:
+	a. Create Fund
+	b. Create Security
+	c. Summary Information
 
- Stock Name - dynamically generated from Stock Type and the number of occurrences of 
+# Implementation Notes:
 
-that Stock Type in the Fund e.g. 'Equity1', 'Equity2', 'Equity3', 'Bond1'
+Application works and return result as decribed in User story.
+It could be refactored with following well known points:
+	1. It was created solution structure, including test project, but code is not covered with the scope of tests due to time spendings. So, point to improve - add tests.
+	2. In ideal case WPF application should follow MVVM pattern, so - using VieModel is also point to improve and refactor.
+	3. Add logging to the application like log4net for example
+	4. Add validation on border values for grids, comboboxes and text fields
 
- Price
-
- Quantity
-
- Market Value - calculated from Price * Quantity
-
- Transaction Cost - calculated from Market Value * 0.5% for 'Equity' Stocks, Market Value 
-
-* 2% for 'Bond' Stocks
-
- Stock Weight (calculated as a Market Value percentage of the Total Market Value of the 
-
-Fund)
-
-4) In my grid, Stock Name should be highlighted Red for any Stocks whose Market Value is < 0 
-
-or Transaction Cost > Tolerance where Tolerance = 100,000 when Stock Type is 'Bond' or 
-
-Tolerance = 200,000 when Stock Type is 'Equity'
-
-5) On the right hand side of my screen I can see a Panel with the following summary level Fund 
-
-information:
-
- Equity - Total Number, Total Stock Weight and Total Market Value of Equities in the 
-
-Fund
-
- Bond - Total Number, Total Stock Weight and Total Market Value of Bonds in the Fund
-
- All - Total Number, Total Stock Weight and Total Market Value of the Fund
+ 
