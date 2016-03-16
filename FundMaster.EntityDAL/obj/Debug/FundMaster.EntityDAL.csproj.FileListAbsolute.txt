@@ -12,3 +12,8 @@ D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\obj\Debug\Fund
 D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\obj\Debug\FundMaster.EntityDAL.pdb
 D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\obj\Debug\FundMaster.Migrations.Initial.resources
 D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\obj\Debug\FundMaster.EntityDAL.csproj.GenerateResource.Cache
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\obj\Debug\FundMaster.Migrations.AddMktValueandTransactionCost.resources
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\obj\Debug\FundMaster.Migrations.TransactionCostupdate.resources
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\obj\Debug\FundMaster.Migrations.SecWeightadd.resources
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\obj\Debug\FundMaster.Migrations.Toleranceadd.resources
+D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.EntityDAL\obj\Debug\FundMaster.Migrations.MktValueupdate.resources

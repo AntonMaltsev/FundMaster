@@ -57,6 +57,26 @@
     <Compile Include="Migrations\201603140610298_Initial.Designer.cs">
       <DependentUpon>201603140610298_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603141030417_Add MktValue and TransactionCost.cs" />
+    <Compile Include="Migrations\201603141030417_Add MktValue and TransactionCost.Designer.cs">
+      <DependentUpon>201603141030417_Add MktValue and TransactionCost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141100222_TransactionCost update.cs" />
+    <Compile Include="Migrations\201603141100222_TransactionCost update.Designer.cs">
+      <DependentUpon>201603141100222_TransactionCost update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603141636401_SecWeight add.cs" />
+    <Compile Include="Migrations\201603141636401_SecWeight add.Designer.cs">
+      <DependentUpon>201603141636401_SecWeight add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603151241113_Tolerance add.cs" />
+    <Compile Include="Migrations\201603151241113_Tolerance add.Designer.cs">
+      <DependentUpon>201603151241113_Tolerance add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603161004175_MktValue update.cs" />
+    <Compile Include="Migrations\201603161004175_MktValue update.Designer.cs">
+      <DependentUpon>201603161004175_MktValue update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecFundRepository.cs" />
@@ -75,6 +95,21 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201603140610298_Initial.resx">
       <DependentUpon>201603140610298_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141030417_Add MktValue and TransactionCost.resx">
+      <DependentUpon>201603141030417_Add MktValue and TransactionCost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141100222_TransactionCost update.resx">
+      <DependentUpon>201603141100222_TransactionCost update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603141636401_SecWeight add.resx">
+      <DependentUpon>201603141636401_SecWeight add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603151241113_Tolerance add.resx">
+      <DependentUpon>201603151241113_Tolerance add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603161004175_MktValue update.resx">
+      <DependentUpon>201603161004175_MktValue update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

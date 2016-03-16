@@ -17,8 +17,8 @@ namespace FundMaster.Migrations
 
         protected override void Seed(FundMasterContext context)
         {
-            context.SecurityType.AddOrUpdate(st => st.Id, new SecurityType { Id = (int)SecurityType.SecurityTypeEnum.Equity, FeeRate = 0.5m, Description = Entity.Utils.Common.GetEnumDescription(SecurityType.SecurityTypeEnum.Equity) });
-            context.SecurityType.AddOrUpdate(st => st.Id, new SecurityType { Id = (int)SecurityType.SecurityTypeEnum.Bond, FeeRate = 2m, Description = Entity.Utils.Common.GetEnumDescription(SecurityType.SecurityTypeEnum.Bond) });
+            context.SecurityType.AddOrUpdate(st => st.Id, new SecurityType { Id = (int)SecurityType.SecurityTypeEnum.Equity, FeeRate = 0.5m, Tolerance = 20000, Description = Entity.Utils.Common.GetEnumDescription(SecurityType.SecurityTypeEnum.Equity) });
+            context.SecurityType.AddOrUpdate(st => st.Id, new SecurityType { Id = (int)SecurityType.SecurityTypeEnum.Bond, FeeRate = 2m, Tolerance = 10000, Description = Entity.Utils.Common.GetEnumDescription(SecurityType.SecurityTypeEnum.Bond) });
             context.SecurityType.AddOrUpdate(st => st.Id, new SecurityType { Id = (int)SecurityType.SecurityTypeEnum.Future, Description = Entity.Utils.Common.GetEnumDescription(SecurityType.SecurityTypeEnum.Future) });
             context.SecurityType.AddOrUpdate(st => st.Id, new SecurityType { Id = (int)SecurityType.SecurityTypeEnum.Option, Description = Entity.Utils.Common.GetEnumDescription(SecurityType.SecurityTypeEnum.Option) });
 

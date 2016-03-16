@@ -13,6 +13,8 @@ namespace FundMaster.Entity
         }
         public decimal? FeeRate { get; set; }
 
+        public int? Tolerance { get; set; }
+
         public enum SecurityTypeEnum
         {
             [Description("Equity")]

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FundMaster.EntityDAL;
 using FundMaster.Entity;
+using FundMaster.Utils;
 
 namespace FundMaster
 {
@@ -29,11 +30,11 @@ namespace FundMaster
             InitializeComponent();
             this.DataContext = this;
 
-            var secRep  = new SecurityRepository();
+            var secRep = new SecurityRepository();
             var fundRep = new FundRepository();
 
-            dataGrid_Fund.ItemsSource       = fundRep.GetAllFundsQuery().ToList();
-            SecType_comboBox.ItemsSource    = secRep.GetSecurityTypes().ToList();
+            dataGrid_Fund.ItemsSource = fundRep.GetAllFundsQuery().ToList();
+            SecType_comboBox.ItemsSource = secRep.GetSecurityTypes().ToList();
             securities_dataGrid.ItemsSource = secRep.GetAllSecuritiesQuery().ToList();
         }
 
@@ -50,10 +51,10 @@ namespace FundMaster
 
                 fundRep.Save();
             }
-            else{
+            else {
                 FundName_txt.Text = "Already exists such Fund name. Please try again.";
             }
-               
+
             dataGrid_Fund.ItemsSource = fundRep.GetAllFundsQuery().ToList();
         }
 
@@ -79,12 +80,12 @@ namespace FundMaster
 
             if (secRep.GetSecurityByName(security_textBox.Text) == null)
             {
-                sec                 =   secRep.CreateReferencedObject();
-                sec.Name            =   security_textBox.Text;
-                sec.Price           =   Convert.ToDecimal(secprice_textBox.Text);
-                sec.Qty             =   Convert.ToInt32(secQty_textBox.Text);
-                sec.SecurityTypeId  =   secRep.GetSecurityTypeByName(SecType_comboBox.SelectedItem.ToString()).Id;
-                sec.IsDeleted       =   ((bool)security_checkBox.IsChecked) ? true : false;
+                sec = secRep.CreateReferencedObject();
+                sec.Name = security_textBox.Text;
+                sec.Price = Convert.ToDecimal(secprice_textBox.Text);
+                sec.Qty = Convert.ToInt32(secQty_textBox.Text);
+                sec.SecurityTypeId = secRep.GetSecurityTypeByName(SecType_comboBox.SelectedItem.ToString()).Id;
+                sec.IsDeleted = ((bool)security_checkBox.IsChecked) ? true : false;
 
                 secRep.Save();
             }
@@ -121,17 +122,18 @@ namespace FundMaster
             var secRep = new SecurityRepository();
 
             FM_sec_list_dataGrid.ItemsSource = secRep.GetSecurityQuery().ToList();
-            FM_sec_fund_list_dataGrid.ItemsSource = secRep.GetSecuritiesByFundId(fundRep.FindByName(funds_comboBox.SelectedItem.ToString()).Id).ToList();
+            if (funds_comboBox.SelectedItem !=null)
+                refresh_fund_datagrid(fundRep.FindByName(funds_comboBox.SelectedItem.ToString()).Id);
         }
 
         private void FM_sec_list_dataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (FM_sec_list_dataGrid.SelectedItem == null)
                 return;
-            
-            var sfRep   = new SecFundRepository();
+
+            var sfRep = new SecFundRepository();
             var fundRep = new FundRepository();
-            var secRep  = new SecurityRepository();
+            var secRep = new SecurityRepository();
 
             int fundId = fundRep.FindByName(funds_comboBox.SelectedItem.ToString()).Id;
             Security row = (Security)FM_sec_list_dataGrid.SelectedItems[0];
@@ -147,7 +149,7 @@ namespace FundMaster
 
                 sfRep.Save();
             }
-            else if(secFund.IsDeleted == true)
+            else if (secFund.IsDeleted == true)
             {
                 secFund.IsDeleted = false;
                 sfRep.Save();
@@ -156,7 +158,7 @@ namespace FundMaster
                 security_textBox.Text = "Already exists such Sec name. Please try again.";
 
             FM_sec_fund_list_dataGrid.ItemsSource = null;
-            FM_sec_fund_list_dataGrid.ItemsSource = secRep.GetSecuritiesByFundId(fundId).ToList();            
+            refresh_fund_datagrid(fundId);
         }
 
         private void FM_sec_fund_list_dataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -169,7 +171,7 @@ namespace FundMaster
             var secRep = new SecurityRepository();
 
             int fundId = fundRep.FindByName(funds_comboBox.SelectedItem.ToString()).Id;
-            Security row = (Security)FM_sec_fund_list_dataGrid.SelectedItems[0];
+            Security row = (Security)FM_sec_fund_list_dataGrid.SelectedItem;
             int secId = Convert.ToInt32(row.Id);
 
             var secFund = sfRep.SecFundByIds(fundId, secId);
@@ -177,8 +179,71 @@ namespace FundMaster
             secFund.IsDeleted = true;
             sfRep.Save();
 
-            FM_sec_fund_list_dataGrid.ItemsSource = null;
+            refresh_fund_datagrid(fundId);
+        }
+
+        public void refresh_fund_datagrid(int fundId)
+        {
+            ////////////////////
+            // Data processing
+            ////////////////////
+
+
+            var secRep = new SecurityRepository();
+            decimal? totalMktVal=0;
+
+            // get Total MktValue
+            foreach (Security sec in secRep.GetSecuritiesByFundId(fundId).ToList())
+            {
+                sec.MktValue = sec.Qty * sec.Price;
+                sec.TransactionCost = secRep.GetSecurityTypeById(sec.SecurityTypeId).FeeRate * sec.MktValue / 100;
+                totalMktVal = (sec.MktValue != null)? totalMktVal + sec.MktValue: totalMktVal;
+            }
+
+            totalMktVal = (totalMktVal == 0) ? 1 : totalMktVal;
+            
+            // set SecWeight
+                            
+            foreach (Security sec in secRep.GetSecuritiesByFundId(fundId).ToList())
+                sec.SecWeight = Math.Round((decimal)(sec.MktValue * 100 / totalMktVal), 2, MidpointRounding.AwayFromZero);
+
+            secRep.Save();
+
             FM_sec_fund_list_dataGrid.ItemsSource = secRep.GetSecuritiesByFundId(fundId).ToList();
+            FM_sec_fund_list_dataGrid.Items.Refresh();
+
+            // Get Summary Data per Fund
+
+            var secRep1 = new SecurityRepository();
+            List<FundSummary> fs = new List<FundSummary> { };
+            
+            foreach (SecurityType st in secRep.GetAllSecurityTypesQuery())
+                fs.Add(secRep1.GetFundSummaryBySecTypeId(fundId, st.Id));
+
+            fundSummary_dataGrid.ItemsSource = null;
+            fundSummary_dataGrid.ItemsSource = fs;
+            fundSummary_dataGrid.Items.Refresh();
+
+            // Set row color
+            foreach (Security item in FM_sec_fund_list_dataGrid.Items.SourceCollection)
+            {
+                var row = FM_sec_fund_list_dataGrid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
+                if (row == null)
+                {
+                    FM_sec_fund_list_dataGrid.UpdateLayout();
+                    FM_sec_fund_list_dataGrid.ScrollIntoView(item);
+                    row = (DataGridRow)FM_sec_fund_list_dataGrid.ItemContainerGenerator.ContainerFromItem(item);
+                }
+
+                if ((secRep.GetSecurityTypeById(item.SecurityTypeId).Tolerance.HasValue)
+                    && ((item.MktValue < 0) || (item.TransactionCost > secRep.GetSecurityTypeById(item.SecurityTypeId).Tolerance)))
+                    row.Background = Brushes.Red;
+            }
+
+            // Set Fund summary Information
+
+
+
         }
     }
 }

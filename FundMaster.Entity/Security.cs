@@ -13,6 +13,11 @@ namespace FundMaster.Entity
         public decimal? Price { get; set; }
         public int Qty { get; set; }
 
+        public decimal? MktValue { get; set; }
+
+        public decimal? TransactionCost { get; set; }
+        public decimal? SecWeight { get; set; }
+
         public virtual SecurityType SecurityType { get; set; }
     }
 }

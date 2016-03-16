@@ -10,6 +10,11 @@ namespace FundMaster.EntityDAL
         {
             return Context.SecFund.Where(f => f.FundId == fundId && f.SecurityId == secId).Select(s => s.Security).FirstOrDefault();                
         }
+        public SecFund SecFundByIds(int fundId)
+        {
+            return Context.SecFund.Where(f => f.FundId == fundId).FirstOrDefault();
+        }
+
         public SecFund SecFundByIds(int fundId, int secId)
         {
             return Context.SecFund.Where(f => f.FundId == fundId && f.SecurityId == secId).FirstOrDefault();

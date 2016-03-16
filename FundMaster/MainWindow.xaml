@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:FundMaster"
         xmlns:EntityDAL="clr-namespace:FundMaster.EntityDAL;assembly=FundMaster.EntityDAL" xmlns:Entity="clr-namespace:FundMaster.Entity;assembly=FundMaster.Entity" x:Class="FundMaster.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="387" Width="749">
+        Title="FundMaster" Height="462" Width="969">
     <Grid Margin="0,0,2,6" RenderTransformOrigin="0.5,0.521">
-        <TabControl x:Name="tabControl" Height="425" Margin="0,10,0,0" Width="750">
+        <TabControl x:Name="tabControl" Margin="10,0">
             <TabItem Header="Fund">
-                <Grid Background="#FFE5E5E5" Margin="0,3,9,77">
+                <Grid Background="#FFE5E5E5" Margin="0,3,9,2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="31*"/>
                         <ColumnDefinition Width="366*"/>
@@ -19,7 +19,7 @@
                     <Label x:Name="label_Copy" Content="Name" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="FundName_txt" HorizontalAlignment="Left" Height="23" Margin="70,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240" Grid.Column="1"/>
                     <Button x:Name="FundSave_button" Content="Add" HorizontalAlignment="Left" Margin="145,117,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="FundSave_button_Click"/>
-                    <DataGrid x:Name="dataGrid_Fund" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="344,18,0,0" VerticalAlignment="Top" SelectionChanged="dataGrid_Fund_SelectionChanged" Grid.Column="1">
+                    <DataGrid x:Name="dataGrid_Fund" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="580,44,0,0" VerticalAlignment="Top" SelectionChanged="dataGrid_Fund_SelectionChanged" Grid.Column="1">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                             <DataGridTextColumn Header="CreatedUTC" Binding="{Binding CreatedUTC}" />
@@ -32,7 +32,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Security">
-                <Grid Background="#FFE5E5E5" Margin="-9,-7,9,7" RenderTransformOrigin="0.5,0.519">
+                <Grid Background="#FFE5E5E5" Margin="-9,-7,-3,2" RenderTransformOrigin="0.5,0.519">
                     <Label x:Name="SecurityInfo_label" Content="Create new security" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="SecurityName_label" Content="Security Name" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="PriceName_label" Content="Security Type" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top"/>
@@ -48,7 +48,7 @@
                             <EntityDAL:FundMasterContext/>
                         </Grid.DataContext>
                     </Grid>
-                    <DataGrid x:Name="securities_dataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="296,58,0,0" VerticalAlignment="Top" Loaded="securities_dataGrid_Loaded">
+                    <DataGrid x:Name="securities_dataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="485,58,0,0" VerticalAlignment="Top" Loaded="securities_dataGrid_Loaded">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                             <DataGridTextColumn Header="SecTypeId" Binding="{Binding SecurityTypeId}" />
@@ -60,9 +60,9 @@
                     </DataGrid>
                     <Label x:Name="QuantityName_label_Copy" Content="Quantity" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="secQty_textBox" HorizontalAlignment="Left" Height="23" Margin="122,154,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                    <Button x:Name="SecurityRefresh_btn" Content="Refresh" HorizontalAlignment="Left" Margin="553,31,0,0" VerticalAlignment="Top" Width="75" Click="SecurityRefresh_btn_Click"/>
+                    <Button x:Name="SecurityRefresh_btn" Content="Refresh" HorizontalAlignment="Left" Margin="741,31,0,0" VerticalAlignment="Top" Width="75" Click="SecurityRefresh_btn_Click"/>
                     <ComboBox x:Name="SecType_comboBox" HorizontalAlignment="Left" Margin="122,89,0,0" VerticalAlignment="Top" Width="169"/>
-                    <Label x:Name="SecurityInfo_label_Copy" Content="Securities List" HorizontalAlignment="Left" Margin="296,25,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="SecurityInfo_label_Copy" Content="Securities List" HorizontalAlignment="Left" Margin="488,25,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="QuantityName_label_Copy1" Content="Mark as Deleted" HorizontalAlignment="Left" Margin="10,181,0,0" VerticalAlignment="Top" Width="113"/>
                     <CheckBox x:Name="security_checkBox" Content="" HorizontalAlignment="Left" Margin="122,187,0,0" VerticalAlignment="Top"/>
                 </Grid>
@@ -70,7 +70,22 @@
             <TabItem Header="Fund Manager">
                 <Grid Background="#FFE5E5E5">
                     <Grid HorizontalAlignment="Left" Height="340" Margin="10,47,-40,0" VerticalAlignment="Top" Width="774">
-                        <DataGrid x:Name="FM_sec_list_dataGrid"  AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="6,69,0,0" VerticalAlignment="Top" MouseDoubleClick="FM_sec_list_dataGrid_MouseDoubleClick" Width="306" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="647*"/>
+                            <ColumnDefinition Width="127*"/>
+                        </Grid.ColumnDefinitions>
+                        <DataGrid x:Name="FM_sec_list_dataGrid"  AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="6,140,0,0" VerticalAlignment="Top" MouseDoubleClick="FM_sec_list_dataGrid_MouseDoubleClick" Width="321" >
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Background" Value="LightGreen" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Green"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
@@ -79,20 +94,44 @@
                                 <DataGridTextColumn Header="Quantity" Binding="{Binding Qty}" />
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Label x:Name="label2" Content="Choose Securities from the list List" HorizontalAlignment="Left" Margin="6,38,0,0" VerticalAlignment="Top"/>
-                        <DataGrid x:Name="FM_sec_fund_list_dataGrid"  AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="342,69,0,0" VerticalAlignment="Top" Width="345" MouseDoubleClick="FM_sec_fund_list_dataGrid_MouseDoubleClick" >
+                        <Label x:Name="label2" Content="Choose Securities from the list List" HorizontalAlignment="Left" Margin="6,109,0,0" VerticalAlignment="Top"/>
+                        <DataGrid x:Name="FM_sec_fund_list_dataGrid" VirtualizingStackPanel.IsVirtualizing="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="342,140,-103,0" VerticalAlignment="Top" Width="535" MouseDoubleClick="FM_sec_fund_list_dataGrid_MouseDoubleClick" Grid.ColumnSpan="2" >
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Background" Value="LightGreen" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Green"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
                                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                                 <DataGridTextColumn Header="SecTypeId" Binding="{Binding SecurityTypeId}" />
                                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
                                 <DataGridTextColumn Header="Quantity" Binding="{Binding Qty}" />
+                                <DataGridTextColumn Header="MarketValue" Binding="{Binding MktValue}" />
+                                <DataGridTextColumn Header="TransactionCost" Binding="{Binding TransactionCost}" />
+                                <DataGridTextColumn Header="SecWeight %" Binding="{Binding SecWeight}" />
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Label x:Name="label2_Copy" Content="Added Securities to the Fund" HorizontalAlignment="Left" Margin="340,38,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="label2_Copy" Content="Added Securities to the Fund" HorizontalAlignment="Left" Margin="340,111,0,0" VerticalAlignment="Top"/>
                     </Grid>
                     <ComboBox x:Name="funds_comboBox" HorizontalAlignment="Left" Margin="97,29,0,0" VerticalAlignment="Top" Width="165" DropDownOpened="funds_comboBox_DropDownOpened" DropDownClosed="funds_comboBox_DropDownClosed"/>
                     <Label x:Name="label1" Content="Select Fund" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.132,1.154"/>
+                    <GroupBox x:Name="groupBox" Header="Fund Summary" HorizontalAlignment="Left" Margin="352,10,0,0" VerticalAlignment="Top" Height="145" Width="535">
+                        <DataGrid x:Name="fundSummary_dataGrid" VirtualizingStackPanel.IsVirtualizing="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="59,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.333,-1" Width="405" Height="115">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="TypeName" Binding="{Binding Name}" />
+                                <DataGridTextColumn Header="TotalNumber" Binding="{Binding TotalNumber}" />
+                                <DataGridTextColumn Header="TotalStockWeight" Binding="{Binding TotalStockWeight}" />
+                                <DataGridTextColumn Header="TotalMktValue" Binding="{Binding TotalMktValue}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
                 </Grid>
             </TabItem>
         </TabControl>

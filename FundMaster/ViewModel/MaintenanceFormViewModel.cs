@@ -14,11 +14,26 @@ namespace FundMaster.ViewModel
         /// <summary>
         /// Guys, I see with what is need to be expanded here - ViewModel and work with notifications, log4net and fields validation, but it takes more time, so suggest to talk on call about that if necessary 
         /// </summary>
-        private Security currentSecurity;
-        public Security CurrentSecurity;
+        /// 
 
-        public SecurityRepository CurrentSecurityRep;
+        public MaintenanceFormViewModel()
+        {
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public Security CurrentSecurity;
+        public Fund CurrentFund;
+        public SecurityRepository CurrentSecurityRep;        
     }
 }
