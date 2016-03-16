@@ -43,9 +43,9 @@ After that it should be created DB structure with initial data seeding
 
 Application works and return result as decribed in User story.
 It could be refactored with following well known points:
-	1. It was created solution structure, including test project, but code is not covered with the scope of tests due to time spendings. So, point to improve - add tests.
-	2. In ideal case WPF application should follow MVVM pattern, so - using VieModel is also point to improve and refactor.
-	3. Add logging to the application like log4net for example
-	4. Add validation on border values for grids, comboboxes and text fields
+	a. It was created solution structure, including test project, but code is not covered with the scope of tests due to time spendings. So, point to improve - add tests.
+	b. In ideal case WPF application should follow MVVM pattern, so - using VieModel is also point to improve and refactor.
+	c. Add logging to the application like log4net for example
+	d. Add validation on border values for grids, comboboxes and text fields
 
  
