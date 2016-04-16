@@ -26,27 +26,17 @@ namespace FundMaster
             this.DataContext = this;
 
             var secRep = new SecurityRepository();
-            var fundRep = new FundRepository();
-
+      
             SecType_comboBox.ItemsSource = secRep.GetSecurityTypes().ToList();
-            securities_dataGrid.ItemsSource = secRep.GetAllSecuritiesQuery().ToList();
+            //securities_dataGrid.ItemsSource = secRep.GetAllSecuritiesQuery().ToList();
         }
-
-        private void dataGrid_Fund_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
+       
         private void button_Click(object sender, RoutedEventArgs e)
         {
             var fundRep = new FundRepository();
             dataGrid_Fund.ItemsSource = fundRep.GetAllFundsQuery().ToList();
         }
-
-        private void securities_dataGrid_Loaded(object sender, RoutedEventArgs e)
-        {
-        }
-
+        
         private void SecurityAdd_btn_Click(object sender, RoutedEventArgs e)
         {
             var secRep = new SecurityRepository();

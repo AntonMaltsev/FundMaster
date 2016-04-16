@@ -33,7 +33,6 @@
                               HorizontalAlignment="Left" 
                               Margin="580,44,0,0" 
                               VerticalAlignment="Top" 
-                              SelectionChanged="dataGrid_Fund_SelectionChanged" 
                               Grid.Column="1">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
@@ -57,9 +56,15 @@
                     <Label x:Name="SecurityName_label" Content="Security Name" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="PriceName_label" Content="Security Type" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="QuantityName_label" Content="Price" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top"/>
-                    <Button x:Name="SecurityAdd_btn" Content="Add" HorizontalAlignment="Left" Margin="216,222,0,0" VerticalAlignment="Top" Width="75" Click="SecurityAdd_btn_Click"/>
-                    <TextBox x:Name="security_textBox" HorizontalAlignment="Left" Height="23" Margin="122,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169"/>
-                    <TextBox x:Name="secprice_textBox" HorizontalAlignment="Left" Height="23" Margin="122,122,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <Button Command="{Binding AddSecurityItem}" 
+                            x:Name="SecurityAdd_btn" 
+                            Content="Add" 
+                            HorizontalAlignment="Left" 
+                            Margin="216,222,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="75"/>
+                    <TextBox Text="{Binding SecName}" x:Name="security_textBox" HorizontalAlignment="Left" Height="23" Margin="122,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169"/>
+                    <TextBox Text="{Binding SecPrice}" x:Name="secprice_textBox" HorizontalAlignment="Left" Height="23" Margin="122,122,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Grid x:Name="SecFundMappingGrid" HorizontalAlignment="Left" Height="292" Margin="372,25,0,0" VerticalAlignment="Top" Width="375" InputScope="{Binding Mode=OneWay}">
                         <Grid.Effect>
                             <DropShadowEffect/>
@@ -68,7 +73,12 @@
                             <EntityDAL:FundMasterContext/>
                         </Grid.DataContext>
                     </Grid>
-                    <DataGrid x:Name="securities_dataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="485,58,0,0" VerticalAlignment="Top" Loaded="securities_dataGrid_Loaded">
+                    <DataGrid ItemsSource="{Binding SecList}"
+                              x:Name="securities_dataGrid" 
+                              AutoGenerateColumns="False" 
+                              HorizontalAlignment="Left" 
+                              Margin="485,58,0,0" 
+                              VerticalAlignment="Top">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                             <DataGridTextColumn Header="SecTypeId" Binding="{Binding SecurityTypeId}" />
@@ -79,12 +89,27 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Label x:Name="QuantityName_label_Copy" Content="Quantity" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="secQty_textBox" HorizontalAlignment="Left" Height="23" Margin="122,154,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Text="{Binding SecQty}" 
+                             x:Name="secQty_textBox" 
+                             HorizontalAlignment="Left" 
+                             Height="23" Margin="122,154,0,0" 
+                             TextWrapping="Wrap" 
+                             VerticalAlignment="Top" 
+                             Width="120"/>
                     <Button x:Name="SecurityRefresh_btn" Content="Refresh" HorizontalAlignment="Left" Margin="741,31,0,0" VerticalAlignment="Top" Width="75" Click="SecurityRefresh_btn_Click"/>
-                    <ComboBox x:Name="SecType_comboBox" HorizontalAlignment="Left" Margin="122,89,0,0" VerticalAlignment="Top" Width="169"/>
+                    <ComboBox SelectedValue="{Binding SecType}" 
+                              x:Name="SecType_comboBox" 
+                              HorizontalAlignment="Left" 
+                              Margin="122,89,0,0" 
+                              VerticalAlignment="Top" 
+                              Width="169"/>
                     <Label x:Name="SecurityInfo_label_Copy" Content="Securities List" HorizontalAlignment="Left" Margin="488,25,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="QuantityName_label_Copy1" Content="Mark as Deleted" HorizontalAlignment="Left" Margin="10,181,0,0" VerticalAlignment="Top" Width="113"/>
-                    <CheckBox x:Name="security_checkBox" Content="" HorizontalAlignment="Left" Margin="122,187,0,0" VerticalAlignment="Top"/>
+                    <CheckBox IsChecked="{Binding isDeletedSec}" 
+                              x:Name="security_checkBox" 
+                              Content="" HorizontalAlignment="Left"
+                              Margin="122,187,0,0" 
+                              VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Fund Manager">

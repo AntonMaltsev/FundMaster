@@ -86,6 +86,7 @@
     </ApplicationDefinition>
     <Compile Include="UtilityClasses\ISequencedObject.cs" />
     <Compile Include="UtilityClasses\ViewModelBase.cs" />
+    <Compile Include="ViewModel\Commands\AddSecurityItemCommand.cs" />
     <Compile Include="ViewModel\Commands\AddFundItemCommand.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\Services\SequencingService.cs" />

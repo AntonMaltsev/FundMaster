@@ -72,47 +72,123 @@ namespace FundMaster
             base.RaisePropertyChangedEvent("FundsList");
         }
 
-        #endregion 
+        #endregion
 
+        #region Securities Tab
 
+        public ICommand AddSecurityItem { get; set; }   // Add Button command
+        private string p_SecName;
+        private string p_secPrice;
 
-        private List<Security> _securities;
-        public List<Security> Securities
+        public string SecPrice
         {
             get
             {
-                return _securities;
+                return p_secPrice;
             }
             set
             {
-                _securities = value;
-                RaisePropertyChangedEvent();
+                p_secPrice = value;
+                base.RaisePropertyChangedEvent("SecPrice");
             }
         }
 
-        private Security _selectedSecurity;
-        public Security SelectedSecurity
+        public string SecName
+        {
+            get { return p_SecName; }
+
+            set
+            {
+                p_SecName = value;
+                base.RaisePropertyChangedEvent("SecName");
+            }
+        }
+
+        private int p_isDeletedSec;
+
+        public int isDeletedSec
         {
             get
             {
-                return _selectedSecurity;
+                return p_isDeletedSec;
             }
             set
             {
-                _selectedSecurity = value;
-                RaisePropertyChangedEvent();
-                //FillSecurity();
+                p_isDeletedSec = value;
+                base.RaisePropertyChangedEvent("isDeletedSec");
             }
         }
+
+        private int p_secQty;
+
+        public int SecQty
+        {
+            get
+            {
+                return p_secQty;
+            }
+            set
+            {
+                p_secQty = value;
+                base.RaisePropertyChangedEvent("SecQty");
+            }
+        }
+
+        private string p_secType;
+        public string SecType
+        {
+            get { return p_secType; }
+
+            set
+            {
+                p_secType = value;
+                base.RaisePropertyChangedEvent("SecType");
+            }
+        }
+
+        private ObservableCollection<Security> p_SecList;
+
+        public ObservableCollection<Security> SecList
+        {
+            get
+            {
+                return p_SecList;
+            }
+
+            set
+            {
+                p_SecList = value;
+                base.RaisePropertyChangedEvent("SecList");
+            }
+        }
+
+        void OnSecListChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            var secRep = new SecurityRepository();
+
+            this.SecList = new ObservableCollection<Security>(secRep.GetAllSecuritiesQuery().ToList());
+            base.RaisePropertyChangedEvent("SecList");
+        }
+
+        #endregion
 
         private void Initialize()
         {
+            // Funds
             var fundRep = new FundRepository();
             this.AddFundItem = new AddFundItemCommand(this);
 
             FundsList = new ObservableCollection<Fund> (fundRep.GetAllFundsQuery().ToList());
             p_FundsList.CollectionChanged += OnFundsListChanged;
             base.RaisePropertyChangedEvent("FundsList");
+
+            // Securities
+            var secRep = new SecurityRepository();
+            this.AddSecurityItem = new AddSecurityItemCommand(this);
+
+            SecList = new ObservableCollection<Security>(secRep.GetAllSecuritiesQuery().ToList());
+            p_SecList.CollectionChanged += OnSecListChanged;
+            base.RaisePropertyChangedEvent("SecList");
         }
     }
 }

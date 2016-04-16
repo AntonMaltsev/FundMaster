@@ -1,0 +1,9 @@
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\bin\Release\FundMaster.Entity.dll.config
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\bin\Release\FundMaster.Entity.dll
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\bin\Release\FundMaster.Entity.pdb
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\bin\Release\EntityFramework.dll
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\bin\Release\EntityFramework.SqlServer.dll
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\bin\Release\EntityFramework.xml
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\bin\Release\EntityFramework.SqlServer.xml
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\obj\Release\FundMaster.Entity.dll
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\obj\Release\FundMaster.Entity.pdb

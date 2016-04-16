@@ -5,7 +5,7 @@ using FundMaster.EntityDAL;
 
 namespace FundMaster.ViewModel.Commands
 {
-    public class AddFundItemCommand : ICommand
+    public class AddSecurityItemCommand : ICommand
     {
         #region Fields
 
@@ -16,7 +16,7 @@ namespace FundMaster.ViewModel.Commands
 
         #region Constructor
 
-        public AddFundItemCommand(MainWindowViewModel viewModel)
+        public AddSecurityItemCommand(MainWindowViewModel viewModel)
         {
             m_ViewModel = viewModel;
         }
@@ -47,16 +47,19 @@ namespace FundMaster.ViewModel.Commands
         /// </summary>
         public void Execute(object parameter)
         {
-            var fundRep = new FundRepository();
+            var secRep = new SecurityRepository();
 
-            var newFund = new Fund
+            var newSec = new Security
             {
-                Name = m_ViewModel.FundName,
-                IsDeleted = (m_ViewModel.isDeletedFund == 1) ? true : false
+                Name = m_ViewModel.SecName,
+                Price = Convert.ToDecimal(m_ViewModel.SecPrice),
+                Qty = m_ViewModel.SecQty,
+                SecurityTypeId = secRep.GetSecurityTypeByName(m_ViewModel.SecType).Id,
+                IsDeleted = (m_ViewModel.isDeletedSec == 1) ? true : false
             };
 
-            fundRep.AddAndSave(newFund);            // Update Model
-            m_ViewModel.FundsList.Add(newFund);     // Rise View Update         
+            secRep.AddAndSave(newSec);            // Update Model
+            m_ViewModel.SecList.Add(newSec);     // Rise View Update         
         }
 
         #endregion
