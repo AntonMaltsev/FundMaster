@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using FundMaster.ViewModel.Services;
 using FundMaster.ViewModel.Commands;
 using FundMaster.Entity;
 using FundMaster.EntityDAL;

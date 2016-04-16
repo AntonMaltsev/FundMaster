@@ -7,9 +7,6 @@
         xmlns:EntityDAL="clr-namespace:FundMaster.EntityDAL;assembly=FundMaster.EntityDAL" xmlns:Entity="clr-namespace:FundMaster.Entity;assembly=FundMaster.Entity" x:Class="FundMaster.MainWindow"
         mc:Ignorable="d"
         Title="FundMaster" Height="462" Width="969">
-    <Window.DataContext>
-        <local:MainWindowViewModel/>
-    </Window.DataContext>
     <Grid Margin="0,0,2,6" RenderTransformOrigin="0.5,0.521">
         <TabControl x:Name="tabControl" Margin="10,0">
             <TabItem Header="Fund">
