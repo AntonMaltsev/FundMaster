@@ -74,7 +74,7 @@ namespace FundMaster.EntityDAL
 
         public decimal? GetSecurityFeeRate(Security sec)
         {            
-            return Context.SecurityType.FirstOrDefault(st => st.Id == sec.Id).FeeRate;
+            return Context.SecurityType.FirstOrDefault(st => st.Id == sec.SecurityTypeId).FeeRate;
         }
 
         public IQueryable<Security> GetSecurityQuery()

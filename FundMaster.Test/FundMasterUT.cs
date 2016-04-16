@@ -2,27 +2,32 @@
 using FundMaster.EntityDAL;
 using FundMaster.ViewModel;
 using System.Data.Entity.SqlServer;
+using System.Linq;
 
 namespace FundMaster.Test
 {
-    
-        [DeploymentItem("EntityFramework.SqlServer.dll")]
-        internal static class MissingDllHack
-        {
-            private static SqlProviderServices instance = SqlProviderServices.Instance;
-        }
-    
+
     [TestClass]    
     public class FundMasterUT
-    {        
+    {
+        private FundMasterContext fm_Context;
+        public FundMasterUT()
+            {            
+                fm_Context = new FundMasterContext();
+            }
+
         [TestMethod]
         public void EquityFeeRateCheck()
-        {
-            var vm = new MaintenanceFormViewModel();            
-            var sec = vm.CurrentSecurityRep.GetSecurityByName("TestEquity");
-            
-            Assert.IsTrue((sec != null) ? vm.CurrentSecurity.Qty * vm.CurrentSecurityRep.GetSecurityFeeRate(sec) == 0.005m : false);
+        {           
+            var sec = fm_Context.Security.Where(s => s.Name == "TestEquity").FirstOrDefault();
+            var secType = fm_Context.SecurityType.FirstOrDefault(st => st.Id == sec.SecurityTypeId);
+
+            if (sec != null)
+                Assert.IsTrue(sec.Qty * secType.FeeRate == 0.5m ? true : false);
+            else
+                Assert.IsTrue(false);
         }
+
 
         [TestMethod]
         public void BondFeeRateCheck()
@@ -30,7 +35,7 @@ namespace FundMaster.Test
             var fr = new SecurityRepository();
             var sec = fr.GetSecurityByName("TestBond");
 
-            Assert.IsTrue((sec != null)? sec.Qty * fr.GetSecurityFeeRate(sec) == 0.02m : false);
+            Assert.IsTrue((sec != null)? sec.Qty * fr.GetSecurityFeeRate(sec) == 2m : false);
         }
         
     }

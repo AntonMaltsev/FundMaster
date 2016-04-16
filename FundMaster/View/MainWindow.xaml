@@ -7,6 +7,9 @@
         xmlns:EntityDAL="clr-namespace:FundMaster.EntityDAL;assembly=FundMaster.EntityDAL" xmlns:Entity="clr-namespace:FundMaster.Entity;assembly=FundMaster.Entity" x:Class="FundMaster.MainWindow"
         mc:Ignorable="d"
         Title="FundMaster" Height="462" Width="969">
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
     <Grid Margin="0,0,2,6" RenderTransformOrigin="0.5,0.521">
         <TabControl x:Name="tabControl" Margin="10,0">
             <TabItem Header="Fund">
@@ -15,11 +18,23 @@
                         <ColumnDefinition Width="31*"/>
                         <ColumnDefinition Width="366*"/>
                     </Grid.ColumnDefinitions>
-                    <Label x:Name="label" Content="Create new Fund" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                    <Label x:Name="label" 
+                           Content="Create new Fund" 
+                           HorizontalAlignment="Left" 
+                           Margin="10,10,0,0" 
+                           VerticalAlignment="Top" 
+                           Grid.ColumnSpan="2"/>
                     <Label x:Name="label_Copy" Content="Name" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="FundName_txt" HorizontalAlignment="Left" Height="23" Margin="70,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240" Grid.Column="1"/>
-                    <Button x:Name="FundSave_button" Content="Add" HorizontalAlignment="Left" Margin="145,117,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="FundSave_button_Click"/>
-                    <DataGrid x:Name="dataGrid_Fund" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="580,44,0,0" VerticalAlignment="Top" SelectionChanged="dataGrid_Fund_SelectionChanged" Grid.Column="1">
+                    <TextBox Text="{Binding FundName}" x:Name="FundName_txt" HorizontalAlignment="Left" Height="23" Margin="70,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Grid.Column="1"/>
+                    <Button Command="{Binding AddFundItem}" Content="Add" HorizontalAlignment="Left" Margin="145,117,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+                    <DataGrid x:Name="dataGrid_Fund" 
+                              ItemsSource="{Binding FundsList}" 
+                              AutoGenerateColumns="False" 
+                              HorizontalAlignment="Left" 
+                              Margin="580,44,0,0" 
+                              VerticalAlignment="Top" 
+                              SelectionChanged="dataGrid_Fund_SelectionChanged" 
+                              Grid.Column="1">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                             <DataGridTextColumn Header="CreatedUTC" Binding="{Binding CreatedUTC}" />
@@ -27,7 +42,12 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Label x:Name="label_Deleted" Content="Mark as deleted" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="117"/>
-                    <CheckBox x:Name="Deleted_checkbox" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="70,88,0,0" VerticalAlignment="Top"/>
+                    <CheckBox IsChecked="{Binding isDeletedFund}" 
+                              x:Name="Deleted_checkbox" 
+                              Grid.Column="1" 
+                              HorizontalAlignment="Left" 
+                              Margin="70,88,0,0" 
+                              VerticalAlignment="Top"/>
                     <Button x:Name="refresh_button" Content="Refresh" Grid.Column="1" HorizontalAlignment="Left" Margin="235,117,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
                 </Grid>
             </TabItem>

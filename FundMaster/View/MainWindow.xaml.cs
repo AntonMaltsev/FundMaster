@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FundMaster.EntityDAL;
 using FundMaster.Entity;
 using FundMaster.Utils;
@@ -25,6 +18,8 @@ namespace FundMaster
 
     public partial class MainWindow : Window
     {
+        private MainWindowViewModel m_ViewModel;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -33,29 +28,8 @@ namespace FundMaster
             var secRep = new SecurityRepository();
             var fundRep = new FundRepository();
 
-            dataGrid_Fund.ItemsSource = fundRep.GetAllFundsQuery().ToList();
             SecType_comboBox.ItemsSource = secRep.GetSecurityTypes().ToList();
             securities_dataGrid.ItemsSource = secRep.GetAllSecuritiesQuery().ToList();
-        }
-
-        private void FundSave_button_Click(object sender, RoutedEventArgs e)
-        {
-            var fundRep = new FundRepository();
-            Fund fund = new Fund();
-
-            if (fundRep.FindByName(FundName_txt.Text) == null)
-            {
-                fund = fundRep.CreateReferencedObject();
-                fund.IsDeleted = ((bool)Deleted_checkbox.IsChecked) ? true : false;
-                fund.Name = FundName_txt.Text;
-
-                fundRep.Save();
-            }
-            else {
-                FundName_txt.Text = "Already exists such Fund name. Please try again.";
-            }
-
-            dataGrid_Fund.ItemsSource = fundRep.GetAllFundsQuery().ToList();
         }
 
         private void dataGrid_Fund_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -188,7 +162,6 @@ namespace FundMaster
             // Data processing
             ////////////////////
 
-
             var secRep = new SecurityRepository();
             decimal? totalMktVal=0;
 
@@ -237,13 +210,14 @@ namespace FundMaster
 
                 if ((secRep.GetSecurityTypeById(item.SecurityTypeId).Tolerance.HasValue)
                     && ((item.MktValue < 0) || (item.TransactionCost > secRep.GetSecurityTypeById(item.SecurityTypeId).Tolerance)))
-                    row.Background = Brushes.Red;
+                    row.Background = Brushes.Red; 
             }
-
             // Set Fund summary Information
+        }
 
-
-
+        private void OnMainGridDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            m_ViewModel = (MainWindowViewModel)this.DataContext;
         }
     }
 }

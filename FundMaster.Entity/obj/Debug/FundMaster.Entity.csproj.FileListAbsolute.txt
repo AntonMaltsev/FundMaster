@@ -8,3 +8,13 @@ D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.Entity\bin\Debug\EntityF
 D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.Entity\bin\Debug\EntityFramework.xml
 D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.Entity\bin\Debug\EntityFramework.SqlServer.xml
 D:\Activity\me\wraclaw-ubs\src\fm\FundMaster\FundMaster.Entity\obj\Debug\FundMaster.Entity.csprojResolveAssemblyReference.cache
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\bin\Debug\FundMaster.Entity.dll.config
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\bin\Debug\FundMaster.Entity.dll
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\bin\Debug\FundMaster.Entity.pdb
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\bin\Debug\EntityFramework.dll
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\bin\Debug\EntityFramework.SqlServer.dll
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\bin\Debug\EntityFramework.xml
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\bin\Debug\EntityFramework.SqlServer.xml
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\obj\Debug\FundMaster.Entity.csprojResolveAssemblyReference.cache
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\obj\Debug\FundMaster.Entity.dll
+D:\Activity\me\wraclaw-ubs\src\fm\fm-ref\FundMaster\FundMaster.Entity\obj\Debug\FundMaster.Entity.pdb

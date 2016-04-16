@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FundMaster.Entity
 {
-    public class Security : BaseEntity
+    public class Security : BaseEntity 
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
