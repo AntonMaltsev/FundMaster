@@ -14,7 +14,7 @@ namespace FundMaster.EntityDAL
             return FirstOrDefault(b => b.Name.ToLower() == fundName.ToLower());
         }
 
-        public IQueryable<Fund> GetNotRemovedFundQuery()
+        public IQueryable<Fund> GetNotRemovedFundQuery1()
         {
             return Filter(s => !s.IsDeleted);
         }
